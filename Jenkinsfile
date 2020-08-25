@@ -1,41 +1,26 @@
-node ('master'){  
-    // def app
+// name of node which we have created to connect jenkins server to appserver
+node ('ubuntu-appserver'){  
+    def app. // variable
     stage('Cloning Git') {
         /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
     }  
-    /* stage('SAST'){
-        build 'SECURITY-SAST-SNYK'
-    } */
-
-    
+   
     stage('Build-and-Tag') {
-        sh 'echo Build-and-tag'
     /* This builds the actual image; synonymous to
          * docker build on the command line */
-        //app = docker.build("kunalvarudkar/snakegame")
+        app = docker.build("kunalvarudkar/snakegame")
     }
     stage('Post-to-dockerhub') {
-        sh 'echo post to docker hub'
-
-    /* docker.withRegistry('https://registry.hub.docker.com', 'training_creds') {
+        // this is registry for pushing to dockerhub
+        docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
             app.push("latest")
-        			} */
+        			} 
          }
-   /* stage('SECURITY-IMAGE-SCANNER'){
-        build 'SECURITY-IMAGE-SCANNER-AQUAMICROSCANNER'
-    } */
-  
-    
+    // invoke docker compose
     stage('Pull-image-server') {
-        sh 'echo pull image server'
-        /* sh "docker-compose down"
-         sh "docker-compose up -d" */	
+        sh "docker-compose down"
+        sh "docker-compose up -d"
       }
     
-   /* stage('DAST')
-        {
-        build 'SECURITY-DAST-OWASP_ZAP'
-        } */
- 
 }
