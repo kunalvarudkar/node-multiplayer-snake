@@ -1,6 +1,6 @@
 // name of node which we have created to connect jenkins server to appserver
 node ('ubuntu-appserver'){  
-    def app. // variable
+    def app // variable
     stage('Cloning Git') {
         /* Let's make sure we have the repository cloned to our workspace */
        checkout scm
