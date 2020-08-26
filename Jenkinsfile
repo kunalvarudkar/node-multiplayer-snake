@@ -1,26 +1,30 @@
-// name of node which we have created to connect jenkins server to appserver
-node ('ubuntu-appserver'){  
-    def app // variable
-    stage('Cloning Git') {
-        /* Let's make sure we have the repository cloned to our workspace */
-       checkout scm
-    }  
-   
-    stage('Build-and-Tag') {
-    /* This builds the actual image; synonymous to
-         * docker build on the command line */
-        app = docker.build("kunalvarudkar/snakegame",".")
+node ('ubuntu-appserver')
+{
+    stage('Git Clone')
+    {
+        checkout scm
     }
-    stage('Post-to-dockerhub') {
-        // this is registry for pushing to dockerhub
-        docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
-            app.push("latest")
-        			} 
-         }
-    // invoke docker compose
-    stage('Pull-image-server') {
+
+    stage('Container Build')
+    {
+        def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
+    }
+
+    stage('Push-Dockerhub')
+    {
+        docker.withRegistry('https://registry.hub.docker.com','dockerhub')
+        {
+            customImage.push("latest")
+        }
+    }
+
+    stage('Pull docker image')
+    {
         sh "docker-compose down"
         sh "docker-compose up -d"
-      }
-    
+    }
 }
+
+
+
+
