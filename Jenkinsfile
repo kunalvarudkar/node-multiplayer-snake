@@ -11,10 +11,9 @@ node ('ubuntu-appserver')
 
     stage('Container Build')
     {
-        //docker.withRegistry('https://registry.example.com', 'dockerhub')
-        //{
-            def customImage = docker.build registry + ":$BUILD_NUMBER"
-        //}
+        
+        def customImage = docker.build registry + ":$BUILD_NUMBER"
+        
     }
 
     stage('Push-Dockerhub')
