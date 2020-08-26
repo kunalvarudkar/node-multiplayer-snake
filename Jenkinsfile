@@ -7,8 +7,10 @@ node ('ubuntu-appserver')
 
     stage('Container Build')
     {
-        //def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
-        sh 'pwd & ls -la'
+        docker.withRegistry('https://registry.example.com', 'dockerhub')
+        {
+            def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
+        }
     }
 
     stage('Push-Dockerhub')
