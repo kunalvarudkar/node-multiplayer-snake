@@ -7,7 +7,8 @@ node ('ubuntu-appserver')
 
     stage('Container Build')
     {
-        def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
+        //def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
+        sh 'echo pwd'
     }
 
     stage('Push-Dockerhub')
