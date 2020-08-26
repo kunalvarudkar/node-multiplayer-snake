@@ -9,7 +9,7 @@ node ('ubuntu-appserver'){
     stage('Build-and-Tag') {
     /* This builds the actual image; synonymous to
          * docker build on the command line */
-        app = docker.build("kunalvarudkar/snakegame")
+        app = docker.build("kunalvarudkar/snakegame",".")
     }
     stage('Post-to-dockerhub') {
         // this is registry for pushing to dockerhub
