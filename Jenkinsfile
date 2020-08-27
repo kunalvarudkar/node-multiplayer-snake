@@ -1,9 +1,5 @@
 node ('ubuntu-appserver')
 {
-    environment
-    {
-        registry = "kunalvarudkar/snakegame"
-    }
     stage('Git Clone')
     {
         checkout scm
@@ -12,7 +8,7 @@ node ('ubuntu-appserver')
     stage('Container Build')
     {
         
-        def customImage = docker.build registry + ":$BUILD_NUMBER"
+        def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
         
     }
 
