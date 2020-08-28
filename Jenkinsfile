@@ -8,7 +8,7 @@ node ('Ubuntu-app-agent')
     stage('Container Build')
     {
         
-        def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
+        def customImage = docker.build("kunalvarudkar/snake}")
         //sh 'echo Container Builing phase'
     }
 
