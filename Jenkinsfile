@@ -9,12 +9,12 @@ node ('Ubuntu-app-agent')
     {
         
        // def customImage = docker.build("kunalvarudkar:${env.BUILD_ID}")
-        sh 'echo Container Builing phase"
+        sh 'echo Container Builing phase'
     }
 
     stage('Push-Dockerhub')
     {
-        sh 'echo Docker push phase"
+        sh 'echo Docker push phase'
        // docker.withRegistry('https://registry.hub.docker.com','dockerhub')
        // {
          //   customImage.push("latest")
@@ -23,7 +23,7 @@ node ('Ubuntu-app-agent')
 
     stage('Pull docker image')
     {
-        sh 'echo Docker pull phase
+        sh 'echo Docker pull phase'
        // sh "docker-compose down"
        // sh "docker-compose up -d"
     }
