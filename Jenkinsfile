@@ -1,5 +1,6 @@
 node ('Ubuntu-app-agent')
 {
+    def customImage
     stage('Git Clone')
     {
        checkout scm
@@ -8,7 +9,7 @@ node ('Ubuntu-app-agent')
     stage('Container Build')
     {
         
-        def customImage = docker.build("kunalvarudkar/snake")
+        customImage = docker.build("kunalvarudkar/snake")
         //sh 'echo Container Builing phase'
     }
 
